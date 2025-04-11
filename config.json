@@ -1,0 +1,139 @@
+{
+  "general": {
+    "input_dir": "/home/user/fuzztruction/fuzztruction-experiments/comparison-with-state-of-the-art/configurations/networked/no-inputs",
+    "work_dir": "/tmp/dclient-dropbear-1",
+    "tracing_timeout": {
+      "secs": 300,
+      "nanos": 0
+    },
+    "jail_uid": 606400022,
+    "jail_gid": 606400022,
+    "jail_drop_to_sudo_callee": true
+  },
+  "source": {
+    "env": [],
+    "bin_path": "/home/user/fuzztruction/fuzztruction-experiments/comparison-with-state-of-the-art/binaries/networked/dropbear/generator/dbclient",
+    "arguments": [
+      "user@127.0.0.1/2255",
+      "-yy",
+      "-i",
+      "/home/user/fuzztruction/fuzztruction-experiments/comparison-with-state-of-the-art/configurations/networked/dropbear/keys/ed25519",
+      "pwd"
+    ],
+    "input_type": "Tcp",
+    "output_type": "Tcp",
+    "output_suffix": null,
+    "log_stdout": true,
+    "log_stderr": true,
+    "is_server": false,
+    "server_port": null,
+    "server_ready_on": null,
+    "allowed_patch_points": null,
+    "max_patch_points": null,
+    "blocked_patchpoint_instructions": null,
+    "working_dir": null
+  },
+  "phases": {
+    "generation_ceiling": null,
+    "discovery": {
+      "enabled": true,
+      "batch_size": 50,
+      "terminate_when_finished": false,
+      "batch_cov_timeout": {
+        "secs": 600,
+        "nanos": 0
+      },
+      "phase_cov_timeout": {
+        "secs": 1200,
+        "nanos": 0
+      }
+    },
+    "mutate": {
+      "weight": 40,
+      "entry_cov_timeout": {
+        "secs": 900,
+        "nanos": 0
+      }
+    },
+    "add": {
+      "weight": 3,
+      "batch_size": 12,
+      "select_unfuzzed_weight": 1,
+      "select_yielding_weight": 1,
+      "select_random_weight": 1,
+      "entry_cov_timeout": {
+        "secs": 900,
+        "nanos": 0
+      }
+    },
+    "combine": {
+      "weight": 10,
+      "entry_cov_timeout": {
+        "secs": 600,
+        "nanos": 0
+      }
+    }
+  },
+  "sink": {
+    "bin_path": "/home/user/fuzztruction/fuzztruction-experiments/comparison-with-state-of-the-art/binaries/networked/dropbear/consumer/dropbear",
+    "arguments": [
+      "-p",
+      "127.0.0.1:2255",
+      "-a",
+      "-F",
+      "-r",
+      "/home/user/fuzztruction/fuzztruction-experiments/comparison-with-state-of-the-art/configurations/networked/dropbear/keys/ed25519",
+      "-E",
+      "-B"
+    ],
+    "env": [],
+    "input_type": "Tcp",
+    "output_type": "Tcp",
+    "log_stdout": true,
+    "log_stderr": true,
+    "allow_unstable_sink": true,
+    "is_server": true,
+    "server_port": "2255",
+    "server_ready_on": null,
+    "working_dir": null,
+    "send_sigterm": false
+  },
+  "sink_cov": {
+    "bin_path": "/home/user/fuzztruction/fuzztruction-experiments/comparison-with-state-of-the-art/binaries/networked/dropbear/consumer_llvm_cov/dropbear",
+    "env": [],
+    "working_dir": null
+  },
+  "vanilla": {
+    "env": [],
+    "bin_path": "/usr/bin/true",
+    "arguments": [
+      "-p",
+      "127.0.0.1:2255",
+      "-a",
+      "-F",
+      "-r",
+      "/home/user/fuzztruction/fuzztruction-experiments/comparison-with-state-of-the-art/configurations/networked/dropbear/keys/ed25519",
+      "-E",
+      "-B"
+    ]
+  },
+  "aflnet": {
+    "env": [],
+    "bin_path": "/home/user/fuzztruction/fuzztruction-experiments/comparison-with-state-of-the-art/binaries/networked/dropbear/consumer_afl_net/dropbear",
+    "input_dir": "/home/user/fuzztruction/fuzztruction-experiments/comparison-with-state-of-the-art/configurations/networked/dropbear/seeds/raw",
+    "protocol": "SSH",
+    "netinfo": "tcp://127.0.0.1/2255",
+    "send_sigterm": false,
+    "enable_state_aware_mode": true
+  },
+  "stateafl": {
+    "bin_path": "/home/user/fuzztruction/fuzztruction-experiments/comparison-with-state-of-the-art/binaries/networked/dropbear/consumer_stateafl/dropbear",
+    "env": [],
+    "input_dir": "/home/user/fuzztruction/fuzztruction-experiments/comparison-with-state-of-the-art/configurations/networked/dropbear/seeds/replayable",
+    "protocol": "SSH",
+    "netinfo": "tcp://127.0.0.1/2255",
+    "send_sigterm": false,
+    "enable_state_aware_mode": true
+  },
+  "sgfuzz": null
+}
